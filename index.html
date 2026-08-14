@@ -1,1 +1,878 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fiddle Coding 🦊</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+
+:root {
+    --purple: #7b3fa1;
+    --purple-dark: #24102f;
+    --purple-light: #c879ed;
+    --pink: #ff8de8;
+    --pink-light: #ffd0f5;
+    --text: #f9eaff;
+    --muted: #cdb8d6;
+    --panel: rgba(34, 18, 46, 0.94);
+    --border: #9b55bf;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Fredoka", "Trebuchet MS", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at 10% 15%, rgba(255,141,232,.15) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 30%, rgba(200,121,237,.14) 0 3px, transparent 4px),
+        radial-gradient(circle at 35% 80%, rgba(255,255,255,.08) 0 2px, transparent 3px),
+        linear-gradient(135deg, #180d21, #321346 45%, #150d20);
+    background-size: 80px 80px, 120px 120px, 100px 100px, cover;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(circle, rgba(255,255,255,.22) 1px, transparent 1px);
+    background-size: 45px 45px;
+    opacity: .18;
+    z-index: -1;
+}
+
+body::after {
+    content: "🦊";
+    position: fixed;
+    right: 15px;
+    bottom: 10px;
+    font-size: 70px;
+    opacity: .08;
+    pointer-events: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wrapper {
+    width: min(1120px, calc(100% - 24px));
+    margin: auto;
+}
+
+header {
+    margin-top: 18px;
+    padding: 25px;
+    border: 3px solid var(--pink);
+    border-radius: 24px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(104,48,132,.96),
+            rgba(38,19,52,.98)
+        );
+    box-shadow:
+        0 0 25px rgba(255,90,220,.35),
+        inset 0 0 30px rgba(255,255,255,.04);
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: "✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧";
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: var(--pink-light);
+    letter-spacing: 7px;
+    opacity: .75;
+    animation: sparkle 2s infinite alternate;
+}
+
+@keyframes sparkle {
+    from {
+        opacity: .35;
+        transform: translateY(2px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand-gif {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--pink);
+    background: #2a1435;
+    box-shadow:
+        0 0 15px rgba(255,100,225,.8),
+        0 0 35px rgba(180,70,240,.3);
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: .95;
+    text-shadow:
+        3px 3px 0 #572675,
+        0 0 16px rgba(255,100,230,.8);
+}
+
+.brand p {
+    margin: 10px 0 0;
+    color: var(--pink-light);
+    font-size: 18px;
+}
+
+nav {
+    margin-top: 23px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+nav a {
+    padding: 10px 17px;
+    background: #54266d;
+    border: 2px solid #b95bdd;
+    border-radius: 999px;
+    font-weight: 600;
+    transition:
+        transform .18s,
+        background .18s,
+        box-shadow .18s;
+}
+
+nav a:hover {
+    background: #803b9f;
+    transform: translateY(-3px) rotate(-1deg);
+    box-shadow: 0 0 15px rgba(255,101,225,.6);
+}
+
+.marquee {
+    margin: 16px 0;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: #211128;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee span {
+    display: inline-block;
+    padding: 8px;
+    color: var(--pink-light);
+    animation: marquee 18s linear infinite;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1.45fr .75fr;
+    gap: 18px;
+}
+
+.card {
+    background: var(--panel);
+    border: 2px solid var(--border);
+    border-radius: 19px;
+    padding: 21px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.25);
+}
+
+.card h2 {
+    margin-top: 0;
+    color: var(--pink);
+    text-shadow: 0 0 10px rgba(255,83,221,.7);
+}
+
+.hero {
+    min-height: 390px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background:
+        radial-gradient(
+            circle at 20% 50%,
+            rgba(194,84,230,.2),
+            transparent 35%
+        ),
+        linear-gradient(
+            135deg,
+            rgba(74,34,93,.96),
+            rgba(25,15,34,.98)
+        );
+}
+
+.hero-gif {
+    width: 245px;
+    height: 290px;
+    object-fit: cover;
+    border-radius: 20px;
+    border: 3px solid var(--pink);
+    background: #291533;
+    box-shadow: 0 0 20px rgba(255,95,223,.55);
+}
+
+.hero-text {
+    flex: 1;
+}
+
+.hero-text h2 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    line-height: 1.7;
+    color: #ead9ef;
+}
+
+.fiddle-tag {
+    display: inline-block;
+    margin: 5px 0 12px;
+    padding: 6px 11px;
+    border-radius: 8px;
+    background: #482155;
+    border: 1px solid #b35bd0;
+    color: #f6c8ff;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 17px;
+}
+
+.badge {
+    padding: 7px 12px;
+    background: #3d204d;
+    border: 1px solid #a856c1;
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.side-gif {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid #a951bf;
+    background: #291433;
+    margin-bottom: 12px;
+}
+
+.status {
+    margin-top: 15px;
+    padding: 13px;
+    border: 2px dashed #9d53b9;
+    border-radius: 12px;
+    background: #19101f;
+}
+
+.online {
+    color: #8affb0;
+    font-weight: bold;
+}
+
+.online::before {
+    content: "●";
+    margin-right: 7px;
+    text-shadow: 0 0 8px #59ff8e;
+}
+
+.gif-section {
+    margin-top: 18px;
+}
+
+.gif-wall {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 11px;
+}
+
+.gif-box {
+    min-height: 145px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 13px;
+    background: #24152c;
+    border: 2px solid #82449f;
+    transition:
+        transform .2s,
+        border-color .2s,
+        box-shadow .2s;
+}
+
+.gif-box:hover {
+    transform: translateY(-4px) rotate(.5deg);
+    border-color: var(--pink);
+    box-shadow: 0 0 18px rgba(255,100,224,.45);
+}
+
+.gif-box img {
+    width: 100%;
+    height: 145px;
+    object-fit: cover;
+    background: #1d1025;
+}
+
+.gif-caption {
+    padding: 7px 9px;
+    font-size: 12px;
+    color: #dcb9e7;
+    background: #2a1832;
+}
+
+.apps {
+    margin-top: 18px;
+}
+
+.app-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.app {
+    min-height: 185px;
+    padding: 17px;
+    border-radius: 16px;
+    border: 2px solid #84469e;
+    background:
+        linear-gradient(
+            145deg,
+            #382044,
+            #21142a
+        );
+    position: relative;
+    overflow: hidden;
+    transition: .2s;
+}
+
+.app::after {
+    content: "🦊";
+    position: absolute;
+    right: -8px;
+    bottom: -16px;
+    font-size: 80px;
+    opacity: .055;
+}
+
+.app:hover {
+    transform: translateY(-5px);
+    border-color: var(--pink);
+    box-shadow: 0 10px 25px rgba(220,85,255,.22);
+}
+
+.app-icon {
+    width: 62px;
+    height: 62px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 2px solid #d66ddd;
+    background: #27152e;
+}
+
+.app h3 {
+    margin: 9px 0 5px;
+    color: #ffb3ed;
+}
+
+.app p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.coming {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 4px 7px;
+    border-radius: 5px;
+    background: #633276;
+    color: #ffd4f6;
+    font-size: 9px;
+    font-weight: bold;
+}
+
+.links {
+    margin-top: 18px;
+}
+
+.link-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.link-button {
+    padding: 10px 14px;
+    background: #3c1d4b;
+    border: 1px solid #a853c1;
+    border-radius: 9px;
+    transition: .2s;
+}
+
+.link-button:hover {
+    background: #71348c;
+    transform: translateY(-2px);
+}
+
+.disclaimer {
+    margin-top: 18px;
+}
+
+.disclaimer-box {
+    padding: 16px;
+    margin-top: 12px;
+    border-radius: 13px;
+    background: #24152c;
+    border: 1px solid #9b55bf;
+}
+
+.disclaimer-box h3 {
+    margin-top: 0;
+    color: #ffabea;
+}
+
+.disclaimer-box p {
+    color: #d8c5df;
+    line-height: 1.6;
+}
+
+.disclaimer-box strong {
+    color: #ffb8ee;
+}
+
+footer {
+    margin: 18px 0 35px;
+    padding: 25px;
+    text-align: center;
+    color: #bfa9c9;
+}
+
+.footer-gifs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.footer-gifs img {
+    width: 75px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 7px;
+    border: 1px solid #86469c;
+}
+
+@media (max-width: 850px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-gif {
+        width: 210px;
+        height: 230px;
+    }
+
+    .gif-wall {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .app-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 520px) {
+    .wrapper {
+        width: min(100% - 12px, 1120px);
+    }
+
+    header {
+        padding: 18px;
+    }
+
+    .brand {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header::before {
+        display: none;
+    }
+
+    .gif-wall,
+    .app-grid {
+        grid-template-columns: 1fr;
+    }
+
+    nav a {
+        flex: 1;
+        text-align: center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<header>
+
+    <div class="brand">
+
+        <img
+            class="brand-gif"
+            src="https://media1.tenor.com/m/Xj-X1v3ul_gAAAAC/fox-girl-stare.gif"
+            alt="Fiddleafox / Averi"
+        >
+
+        <div>
+            <h1>Fiddle Coding</h1>
+
+            <p>
+                🦊 coding, projects &amp; excessive amounts of Averi
+            </p>
+        </div>
+
+    </div>
+
+    <nav>
+        <a href="#home">🏠 Home</a>
+        <a href="#about">🦊 About</a>
+        <a href="#apps">💻 Apps</a>
+        <a href="#links">🔗 Links</a>
+        <a href="#disclaimer">⚠️ Disclaimers</a>
+    </nav>
+
+</header>
+
+<div class="marquee">
+    <span>
+        🦊 WELCOME TO FIDDLE CODING ✦ AVERI ZONE ✦ CODING STUFF ✦
+        RANDOM PROJECTS ✦ GIFS EVERYWHERE ✦ 🦊
+    </span>
+</div>
+
+<main id="home">
+
+<section class="card hero">
+
+    <img
+        class="hero-gif"
+        src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTU0Zzdyc2dia3RkaDQxOHM4djN5ZzY3OWYzeWwzZmJwdTdrb2k4MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ufqMnWsnHovRxKtlo1/giphy.gif"
+        alt="Fiddleafox / Averi animated GIF"
+    >
+
+    <div class="hero-text">
+
+        <span class="fiddle-tag">
+            🦊 FIDDLE CODING
+        </span>
+
+        <h2>Hey! Welcome :3</h2>
+
+        <p>
+            Welcome to <b>Fiddle Coding</b>, my little corner of the
+            internet for coding projects, experiments, games,
+            random utilities and furry internet nonsense.
+        </p>
+
+        <p>
+            Grab some snacks, look around and enjoy the
+            completely reasonable amount of animated foxes.
+        </p>
+
+        <div class="badges">
+            <span class="badge">🦊 Averi enjoyer</span>
+            <span class="badge">💻 Developer</span>
+            <span class="badge">🎮 Gamer</span>
+            <span class="badge">✨ GIF enthusiast</span>
+            <span class="badge">🐾 Furry-friendly</span>
+        </div>
+
+    </div>
+
+</section>
+
+<aside class="card" id="about">
+
+    <h2>🦊 About Fiddle Coding</h2>
+
+    <img
+        class="side-gif"
+        src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdDdtOXg0NG5xY2pweGFjcGl2YjhjOHNxbnVtcDR5dWM5ejZlaTN1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/94ljsz1TAGJCH4josA/giphy.gif"
+        alt="Fiddleafox / Averi GIF"
+    >
+
+    <p>
+        Hi! I'm <b>Fiddle Coding</b>.
+    </p>
+
+    <p>
+        I make software, mess around with computers and
+        occasionally create something that actually works.
+    </p>
+
+    <p>
+        This site is basically my place to escape from the real world since I love the internet :3
+    </p>
+
+    <div class="status">
+        <div class="online">ONLINE</div>
+        <small>Probably coding something right now.</small>
+    </div>
+
+</aside>
+
+</main>
+
+<section class="card apps" id="apps">
+
+    <h2>💻 Fiddle Apps</h2>
+
+    <p>
+        My collection of projects and little web toys.
+    </p>
+
+    <div class="app-grid">
+
+        <div class="app">
+            <span class="coming">COMING SOON</span>
+
+            <img
+                class="app-icon"
+                src="https://media.giphy.com/media/Q9ihQOiLiPDqEegwva/giphy.gif"
+                alt=""
+            >
+
+            <h3>🛠️ Project Hub</h3>
+
+            <p>
+                Browse all of my coding projects in one place.
+            </p>
+        </div>
+
+        <div class="app">
+            <span class="coming">SOON</span>
+
+            <img
+                class="app-icon"
+                src="https://media.giphy.com/media/Q9ihQOiLiPDqEegwva/giphy.gif"
+                alt=""
+            >
+
+            <h3>🎮 Games</h3>
+
+            <p>
+                A collection of games and experiments.
+            </p>
+        </div>
+
+        <div class="app">
+            <span class="coming">SOON</span>
+
+            <img
+                class="app-icon"
+                src="https://media.giphy.com/media/Q9ihQOiLiPDqEegwva/giphy.gif"
+                alt=""
+            >
+
+            <h3>💾 DS Projects</h3>
+
+            <p>
+                Nintendo DS homebrew and other handheld projects.
+            </p>
+        </div>
+
+        <div class="app">
+            <span class="coming">PLACEHOLDER</span>
+
+            <img
+                class="app-icon"
+                src="https://media.giphy.com/media/Q9ihQOiLiPDqEegwva/giphy.gif"
+                alt=""
+            >
+
+            <h3>🧰 Utilities</h3>
+
+            <p>
+                Small tools and useful things I've made.
+            </p>
+        </div>
+
+        <div class="app">
+            <span class="coming">SOON</span>
+
+            <img
+                class="app-icon"
+                src="https://media.giphy.com/media/Q9ihQOiLiPDqEegwva/giphy.gif"
+                alt=""
+            >
+
+            <h3>🎨 Gallery</h3>
+
+            <p>
+                Artwork, graphics and other visual projects.
+            </p>
+        </div>
+
+        <div class="app">
+            <span class="coming">PLACEHOLDER</span>
+
+            <img
+                class="app-icon"
+                src="https://media.giphy.com/media/Q9ihQOiLiPDqEegwva/giphy.gif"
+                alt=""
+            >
+
+            <h3>📡 Status</h3>
+
+            <p>
+                Website and project status information.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="card links" id="links">
+
+    <h2>🔗 Find Me Around The Internet</h2>
+	<p>below are the ONLY offical socials I have and my only offical domain is https://fiddlecoding.github.io</p>
+
+    <div class="link-grid">
+
+        <a class="link-button" href="https://github.com/fiddlecoding">GitHub</a>
+        <a class="link-button" href="https://x.com/fiddlecoding">X (Twitter)</a>
+        <a class="link-button" href="mailto:fiddlecoding@duck.com">Email Me</a>
+    </div>
+
+</section>
+
+<section class="card disclaimer" id="disclaimer">
+
+    <h2>⚠️ Disclaimers</h2>
+
+    <div class="disclaimer-box">
+
+        <h3>💻 Vibe Coding Disclaimer</h3>
+
+        <p>
+            Some projects on Fiddle Coding may be made with the help
+            of AI-assisted or "vibe coding" techniques.
+        </p>
+
+        <p>
+            Code may be experimental, messy, silly, or held together
+            by digital duct tape. Please review and test anything
+            before relying on it for important purposes.
+        </p>
+
+    </div>
+
+    <div class="disclaimer-box">
+
+        <h3>🦊 Fiddleafox Disclaimer</h3>
+
+        <p>
+            Fiddle Coding is a personal fan-themed website and does
+            not represent or endorse the personal views, opinions,
+            or beliefs of Fiddleafox/Averi.
+        </p>
+
+        <p>
+            In particular, I do <strong>not</strong> agree with or
+            support racist beliefs or other hateful views attributed
+            to Fiddleafox. The use of Fiddleafox/Averi imagery on
+            this site is not intended as an endorsement of those views. I just love the foxes lol
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <div class="footer-gifs">
+
+        <img
+            src="https://media1.tenor.com/m/4Ga0EfOs--4AAAAC/fiddleafox-drill.gif"
+            alt=""
+        >
+
+        <img
+            src="https://media1.tenor.com/m/VvbsbqOKDigAAAAC/tail-wag-drink.gif"
+            alt=""
+        >
+
+        <img
+            src="https://media.giphy.com/media/Q9ihQOiLiPDqEegwva/giphy.gif"
+            alt=""
+        >
+
+    </div>
+
+    🦊 Fiddle Coding • made with code and foxes
+
+    <br>
+
+    <small>
+        © 2026 Fiddle Coding • under construction 🚧
+    </small>
+
+</footer>
+
+</div>
+
+</body>
+</html>
