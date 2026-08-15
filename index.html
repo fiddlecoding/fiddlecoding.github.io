@@ -561,6 +561,51 @@ footer {
 </head>
 
 <body>
+<!-- Audio Player Fixed to Bottom Right -->
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+
+<!-- Custom Bottom Right Button Option -->
+<button id="music-toggle-btn" onclick="toggleMusic()">
+  🔇 Play Music
+</button>
+
+<style>
+#music-toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background-color: #222;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#music-toggle-btn:hover {
+  background-color: #444;
+}
+</style>
+
+<script>
+const music = document.getElementById('bg-music');
+const btn = document.getElementById('music-toggle-btn');
+
+function toggleMusic() {
+  if (music.paused) {
+    music.play();
+    btn.textContent = '🔊 Pause Music';
+  } else {
+    music.pause();
+    btn.textContent = '🔇 Play Music';
+  }
+}
+</script>
 
 <div class="wrapper">
 
