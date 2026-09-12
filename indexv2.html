@@ -3,249 +3,222 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blaze the Fox — Furry Den</title>
+  <title>FiddleCoding 🦊💻 — Code + Averi Enjoyer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --orange: #ff7a3d;
-      --deep-orange: #e85d04;
-      --cream: #fff8f0;
-      --warm-brown: #5c3a21;
-      --soft-red: #c1121f;
-      --gold: #ffb703;
-      --night: #1a120b;
-      --card: #fff1e3;
-      --accent: #fb8500;
+      --orange: #ff6b35;
+      --green: #7cfc00;
+      --lime: #adff2f;
+      --cream: #fff8e7;
+      --pink: #ff69b4;
+      --purple: #c77dff;
+      --yellow: #ffd60a;
+      --dark: #1a1a2e;
+      --fox: #e85d04;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Quicksand', system-ui, sans-serif;
-      background: var(--cream);
-      color: var(--warm-brown);
-      line-height: 1.6;
+      font-family: 'Comic Neue', 'Comic Sans MS', cursive, system-ui;
+      background: linear-gradient(135deg, #fff8e7 0%, #ffe4c4 40%, #e0ffe0 100%);
+      color: #2d1b0e;
+      line-height: 1.5;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    /* Floating fox ears decoration */
-    .ears {
+    .floaties {
       position: fixed;
-      top: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 1000;
+      inset: 0;
       pointer-events: none;
-      display: flex;
-      gap: 60px;
+      z-index: 0;
+      overflow: hidden;
     }
-    .ear {
-      width: 42px;
-      height: 55px;
-      background: var(--orange);
-      border-radius: 50% 50% 10% 10%;
-      position: relative;
-      box-shadow: 0 4px 12px rgba(232, 93, 4, 0.35);
-    }
-    .ear::after {
-      content: '';
+    .floaty {
       position: absolute;
-      top: 10px;
-      left: 8px;
-      width: 22px;
-      height: 32px;
-      background: #ffcdb2;
-      border-radius: 50% 50% 20% 20%;
+      font-size: 2rem;
+      animation: floaty 8s ease-in-out infinite;
+      opacity: 0.5;
     }
-    .ear.right {
-      transform: scaleX(-1);
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(15deg); }
     }
 
-    /* Navigation */
+    .rainbow-bar {
+      height: 8px;
+      background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+      background-size: 200% 100%;
+      animation: rainbow 3s linear infinite;
+    }
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
     nav {
       position: sticky;
       top: 0;
-      z-index: 900;
-      background: rgba(255, 248, 240, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 2px solid rgba(255, 122, 61, 0.25);
-      padding: 0.85rem 1.5rem;
+      z-index: 100;
+      background: rgba(255, 248, 231, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 4px dashed var(--orange);
+      padding: 0.7rem 1.2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .logo {
       font-family: 'Fredoka', sans-serif;
-      font-weight: 600;
-      font-size: 1.35rem;
-      color: var(--deep-orange);
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: var(--fox);
+      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      text-decoration: none;
+      gap: 0.35rem;
     }
-
-    .logo span {
-      font-size: 1.6rem;
-    }
+    .logo:hover { transform: scale(1.05) rotate(-2deg); }
 
     .nav-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 1rem;
       list-style: none;
+      flex-wrap: wrap;
     }
-
     .nav-links a {
       text-decoration: none;
-      color: var(--warm-brown);
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-      position: relative;
+      color: #2d1b0e;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      transition: all 0.2s;
     }
-
     .nav-links a:hover {
-      color: var(--deep-orange);
+      background: var(--lime);
+      transform: rotate(-3deg) scale(1.1);
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--orange);
-      transition: width 0.25s;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero */
     .hero {
-      min-height: 88vh;
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2.5rem 1rem 3rem;
+      min-height: 85vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 3rem 1.5rem 4rem;
-      position: relative;
-      background:
-        radial-gradient(ellipse at 20% 30%, rgba(255, 183, 3, 0.18) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(255, 122, 61, 0.15) 0%, transparent 45%),
-        linear-gradient(165deg, #fff8f0 0%, #ffe8d6 100%);
-      overflow: hidden;
     }
 
-    .hero::before {
-      content: '🦊';
-      position: absolute;
-      font-size: 18rem;
-      opacity: 0.06;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-12deg);
-      pointer-events: none;
-    }
-
-    .avatar-wrap {
-      position: relative;
-      margin-bottom: 1.75rem;
-    }
-
-    .avatar {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #ff9a5a, #e85d04);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 6.5rem;
-      box-shadow:
-        0 12px 40px rgba(232, 93, 4, 0.35),
-        inset 0 -8px 20px rgba(0,0,0,0.12);
-      border: 5px solid #fff;
-      animation: float 4s ease-in-out infinite;
-      position: relative;
-      z-index: 2;
-    }
-
-    .tail {
-      position: absolute;
-      width: 70px;
-      height: 110px;
-      background: linear-gradient(180deg, #ff7a3d, #c1121f);
-      border-radius: 50% 50% 40% 40%;
-      right: -35px;
-      bottom: 10px;
-      transform: rotate(25deg);
-      z-index: 1;
-      box-shadow: 4px 4px 15px rgba(0,0,0,0.15);
-      animation: wag 2.5s ease-in-out infinite;
-    }
-
-    .tail::after {
-      content: '';
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 28px;
-      height: 28px;
-      background: #fff;
-      border-radius: 50%;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    @keyframes wag {
-      0%, 100% { transform: rotate(25deg); }
-      50% { transform: rotate(35deg); }
-    }
-
-    .hero h1 {
+    .hero-title {
       font-family: 'Fredoka', sans-serif;
-      font-size: clamp(2.4rem, 6vw, 3.6rem);
-      font-weight: 600;
-      color: var(--warm-brown);
-      margin-bottom: 0.4rem;
-      letter-spacing: -0.02em;
+      font-size: clamp(2.2rem, 7vw, 3.8rem);
+      font-weight: 700;
+      color: var(--fox);
+      text-shadow: 3px 3px 0 var(--yellow), -2px -2px 0 var(--green);
+      margin-bottom: 0.3rem;
+      animation: wiggle 2s ease-in-out infinite;
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-1deg); }
+      50% { transform: rotate(1.5deg); }
     }
 
-    .hero h1 .accent {
-      color: var(--deep-orange);
+    .hero-sub {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #2d6a4f;
+      margin-bottom: 1rem;
     }
 
-    .tagline {
-      font-size: 1.25rem;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 1.25rem;
+    .hero-desc {
+      max-width: 560px;
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem;
+      background: white;
+      padding: 1rem 1.4rem;
+      border-radius: 20px;
+      border: 4px solid var(--orange);
+      box-shadow: 6px 6px 0 var(--pink);
     }
 
-    .hero p {
-      max-width: 520px;
-      font-size: 1.05rem;
-      opacity: 0.9;
-      margin-bottom: 2rem;
+    .gif-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+      max-width: 900px;
+    }
+
+    .gif-box {
+      background: white;
+      border: 4px solid var(--green);
+      border-radius: 16px;
+      padding: 0.5rem;
+      box-shadow: 5px 5px 0 var(--purple);
+      transition: transform 0.2s;
+      max-width: 200px;
+    }
+    .gif-box:hover {
+      transform: scale(1.08) rotate(3deg);
+    }
+    .gif-box img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+      background: #f0f0f0;
+    }
+    .gif-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-top: 0.4rem;
+      color: var(--fox);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-decoration: none;
+      border: 4px solid #000;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
+      box-shadow: 5px 5px 0 #000;
+    }
+    .btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 8px 8px 0 #000;
+    }
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #000;
+    }
+    .btn-primary {
+      background: var(--lime);
+      color: #000;
+    }
+    .btn-secondary {
+      background: var(--pink);
+      color: #000;
     }
 
     .cta-row {
@@ -253,449 +226,368 @@
       gap: 1rem;
       flex-wrap: wrap;
       justify-content: center;
+      margin-top: 0.5rem;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.85rem 1.6rem;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--orange), var(--deep-orange));
-      color: white;
-      box-shadow: 0 6px 20px rgba(232, 93, 4, 0.4);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(232, 93, 4, 0.5);
-    }
-
-    .btn-secondary {
-      background: white;
-      color: var(--deep-orange);
-      border: 2px solid var(--orange);
-    }
-
-    .btn-secondary:hover {
-      transform: translateY(-3px);
-      background: #fff5eb;
-    }
-
-    /* Sections */
     section {
-      padding: 4.5rem 1.5rem;
-      max-width: 1100px;
+      position: relative;
+      z-index: 1;
+      padding: 3.5rem 1.2rem;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
     .section-title {
       font-family: 'Fredoka', sans-serif;
-      font-size: 2rem;
+      font-size: 2.2rem;
       text-align: center;
-      margin-bottom: 0.5rem;
-      color: var(--warm-brown);
+      margin-bottom: 0.3rem;
+      color: var(--fox);
+      text-shadow: 2px 2px 0 var(--yellow);
     }
-
     .section-sub {
       text-align: center;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 2.5rem;
+      font-weight: 700;
+      color: #2d6a4f;
+      margin-bottom: 2rem;
+      font-size: 1.15rem;
     }
 
-    /* About */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    @media (max-width: 768px) {
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
-      .nav-links {
-        gap: 1rem;
-        font-size: 0.9rem;
-      }
-    }
-
-    .about-card {
-      background: var(--card);
-      border-radius: 24px;
-      padding: 2rem;
-      box-shadow: 0 8px 30px rgba(92, 58, 33, 0.08);
-      border: 1px solid rgba(255, 122, 61, 0.15);
-    }
-
-    .about-card h3 {
-      font-family: 'Fredoka', sans-serif;
-      color: var(--deep-orange);
-      margin-bottom: 0.75rem;
-      font-size: 1.35rem;
-    }
-
-    .traits {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-top: 1.25rem;
-    }
-
-    .trait {
-      background: white;
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--warm-brown);
-      border: 1.5px solid rgba(255, 122, 61, 0.3);
-    }
-
-    /* Gallery / Interests */
-    .cards {
+    .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
+      gap: 1.4rem;
     }
 
     .card {
       background: white;
+      border: 4px solid var(--orange);
       border-radius: 20px;
-      padding: 1.75rem;
+      padding: 1.4rem;
       text-align: center;
-      box-shadow: 0 6px 24px rgba(92, 58, 33, 0.07);
-      border: 1px solid rgba(255, 122, 61, 0.12);
-      transition: transform 0.25s, box-shadow 0.25s;
+      box-shadow: 6px 6px 0 var(--purple);
+      transition: transform 0.2s;
     }
-
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 36px rgba(232, 93, 4, 0.15);
+      transform: translateY(-8px) rotate(-1deg);
     }
-
-    .card-icon {
-      font-size: 2.8rem;
-      margin-bottom: 0.75rem;
-    }
-
+    .card-icon { font-size: 3rem; margin-bottom: 0.5rem; }
     .card h3 {
       font-family: 'Fredoka', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      color: var(--fox);
       margin-bottom: 0.4rem;
-      color: var(--deep-orange);
     }
 
-    .card p {
+    .code-block {
+      background: #1a1a2e;
+      color: #7cfc00;
+      font-family: 'Courier New', monospace;
+      padding: 1.2rem 1.4rem;
+      border-radius: 16px;
+      border: 4px solid var(--green);
+      box-shadow: 6px 6px 0 var(--pink);
       font-size: 0.95rem;
-      opacity: 0.85;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      text-align: left;
     }
+    .code-block .comment { color: #aaa; }
+    .code-block .kw { color: #ff69b4; }
+    .code-block .str { color: #ffd60a; }
 
-    /* Fun facts */
-    .facts {
-      background: linear-gradient(160deg, #fff1e3, #ffe4cc);
-      border-radius: 28px;
-      padding: 2.5rem 2rem;
-      margin-top: 1rem;
-    }
-
-    .fact-list {
+    .silly-list {
       display: grid;
       gap: 1rem;
       max-width: 700px;
       margin: 0 auto;
     }
-
-    .fact {
+    .silly-item {
+      background: white;
+      border: 3px solid var(--green);
+      border-radius: 16px;
+      padding: 1rem 1.3rem;
       display: flex;
       gap: 1rem;
       align-items: flex-start;
+      box-shadow: 4px 4px 0 var(--orange);
+      font-weight: 600;
+    }
+    .silly-item span { font-size: 1.8rem; flex-shrink: 0; }
+
+    .social-box {
+      text-align: center;
       background: white;
-      padding: 1.1rem 1.3rem;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      border: 5px dashed var(--pink);
+      border-radius: 24px;
+      padding: 2rem 1.5rem;
+      max-width: 480px;
+      margin: 0 auto;
+      box-shadow: 8px 8px 0 var(--purple);
     }
-
-    .fact-emoji {
-      font-size: 1.6rem;
-      flex-shrink: 0;
-    }
-
-    /* Contact / Social */
-    .socials {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 1.5rem;
-    }
-
-    .social {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
+    .social-box a.big-x {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 1rem 2rem;
+      background: #000;
+      color: white;
+      font-weight: 700;
+      font-size: 1.3rem;
+      border-radius: 999px;
       text-decoration: none;
-      box-shadow: 0 4px 16px rgba(232, 93, 4, 0.15);
-      transition: transform 0.2s, background 0.2s;
-      border: 2px solid transparent;
+      border: 4px solid var(--green);
+      box-shadow: 5px 5px 0 var(--lime);
+      transition: all 0.15s;
+    }
+    .social-box a.big-x:hover {
+      transform: scale(1.08) rotate(-2deg);
+      background: #1a1a1a;
     }
 
-    .social:hover {
-      transform: scale(1.12);
-      background: var(--orange);
-      border-color: var(--deep-orange);
-    }
-
-    /* Footer */
     footer {
       text-align: center;
-      padding: 2.5rem 1.5rem;
-      background: var(--night);
-      color: #ffcdb2;
-      font-size: 0.95rem;
+      padding: 2rem 1rem;
+      background: var(--dark);
+      color: #adff2f;
+      font-weight: 700;
+      margin-top: 2rem;
     }
+    footer a { color: var(--pink); }
 
-    footer .heart {
-      color: var(--orange);
-    }
-
-    /* Paw cursor trail (subtle) */
-    .paw {
+    .particle {
       position: fixed;
       pointer-events: none;
-      font-size: 1.2rem;
-      opacity: 0;
       z-index: 9999;
-      transition: opacity 0.3s;
+      font-size: 1.4rem;
+      animation: pop 0.8s ease-out forwards;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5) translateY(0); opacity: 1; }
+      100% { transform: scale(1.4) translateY(-60px); opacity: 0; }
     }
 
-    /* Responsive tweaks */
+    .spinner {
+      display: inline-block;
+      animation: spin 3s linear infinite;
+      font-size: 2.5rem;
+    }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
     @media (max-width: 600px) {
-      .ears { gap: 40px; }
-      .ear { width: 32px; height: 42px; }
-      .avatar { width: 140px; height: 140px; font-size: 5rem; }
-      .tail { width: 50px; height: 80px; right: -25px; }
+      .hero-title { font-size: 2rem; }
+      .gif-box { max-width: 150px; }
+      .gif-box img { height: 120px; }
     }
   </style>
 </head>
 <body>
-  <!-- Decorative ears -->
-  <div class="ears" aria-hidden="true">
-    <div class="ear"></div>
-    <div class="ear right"></div>
+  <div class="rainbow-bar"></div>
+
+  <div class="floaties" aria-hidden="true">
+    <div class="floaty" style="top:10%; left:5%; animation-delay:0s">🦊</div>
+    <div class="floaty" style="top:20%; right:8%; animation-delay:1s">🍗</div>
+    <div class="floaty" style="top:60%; left:3%; animation-delay:2s">💻</div>
+    <div class="floaty" style="top:70%; right:5%; animation-delay:0.5s">🥪</div>
+    <div class="floaty" style="top:40%; left:10%; animation-delay:1.5s">✨</div>
+    <div class="floaty" style="top:15%; left:40%; animation-delay:2.5s">🐔</div>
+    <div class="floaty" style="top:80%; left:30%; animation-delay:0.8s">💚</div>
   </div>
 
   <nav>
-    <a href="#" class="logo"><span>🦊</span> Blaze</a>
+    <a href="#" class="logo">🦊💻 FiddleCoding</a>
     <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#interests">Interests</a></li>
-      <li><a href="#facts">Fun Facts</a></li>
+      <li><a href="#about">Who??</a></li>
+      <li><a href="#averi">Averi 💚</a></li>
+      <li><a href="#code">Code Stuff</a></li>
       <li><a href="#den">Den</a></li>
     </ul>
   </nav>
 
   <header class="hero">
-    <div class="avatar-wrap">
-      <div class="avatar" aria-hidden="true">🦊</div>
-      <div class="tail" aria-hidden="true"></div>
-    </div>
-    <h1>Hey, I’m <span class="accent">Blaze</span></h1>
-    <p class="tagline">Fox furry • Forest explorer • Tail-wagger extraordinaire</p>
-    <p>
-      Welcome to my little corner of the internet!  
-      I’m a curious red fox who’s always ready for an adventure, a good snack,  
-      or just curling up with friends under the stars.
+    <div class="spinner">🥪</div>
+    <h1 class="hero-title">FiddleCoding</h1>
+    <p class="hero-sub">coder • Averi enjoyer • chicken sandwich scholar</p>
+    
+    <p class="hero-desc">
+      hi hello!! i write code and also have a <strong>critically high</strong> level of affection for 
+      <span style="color:var(--fox);font-weight:700;">FiddleaFox’s Averi</span> 
+      (the best green-eyed fox who loves chicken 🍗).  
+      this is my silly little corner of the internet. welcome to the den!!
     </p>
+
+    <div class="gif-row">
+      <div class="gif-box">
+        <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Typing cat energy" loading="lazy">
+        <div class="gif-label">me coding (Averi approved)</div>
+      </div>
+      <div class="gif-box">
+        <img src="https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif" alt="Happy dance" loading="lazy">
+        <div class="gif-label">when it finally works</div>
+      </div>
+      <div class="gif-box">
+        <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Fox vibes" loading="lazy">
+        <div class="gif-label">Averi brainrot</div>
+      </div>
+      <div class="gif-box">
+        <img src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif" alt="Spin" loading="lazy">
+        <div class="gif-label">chicken sandwich spin</div>
+      </div>
+    </div>
+
     <div class="cta-row">
-      <a href="#about" class="btn btn-primary">Get to know me</a>
-      <a href="#den" class="btn btn-secondary">Visit the den</a>
+      <a href="#averi" class="btn btn-primary">why Averi tho??</a>
+      <a href="https://x.com/fiddlecoding" target="_blank" rel="noopener" class="btn btn-secondary">go to my X →</a>
     </div>
   </header>
 
   <section id="about">
-    <h2 class="section-title">About Me</h2>
-    <p class="section-sub">A little about this fox</p>
+    <h2 class="section-title">who is this fox-coded human??</h2>
+    <p class="section-sub">a very normal coder who definitely does not have 47 Averi tabs open</p>
 
-    <div class="about-grid">
-      <div class="about-card">
-        <h3>Who I am</h3>
-        <p>
-          I’m Blaze — a playful, warm-hearted fox furry who loves the outdoors,  
-          creative hobbies, and making new friends. You’ll usually find me  
-          with a bright smile, fluffy ears perked up, and my big bushy tail  
-          swishing behind me.
-        </p>
-        <div class="traits">
-          <span class="trait">Friendly</span>
-          <span class="trait">Curious</span>
-          <span class="trait">Loyal</span>
-          <span class="trait">Playful</span>
-          <span class="trait">Creative</span>
-        </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3>I code things</h3>
+        <p>bugs fear me. or at least they should. sometimes I fear the bugs more.</p>
       </div>
-
-      <div class="about-card">
-        <h3>My vibe</h3>
-        <p>
-          Think warm autumn leaves, campfires, and the soft glow of sunset.  
-          I’m all about cozy energy mixed with a spark of mischief.  
-          Whether it’s drawing, exploring trails, or just hanging out,  
-          I try to bring a bit of fox magic wherever I go.
-        </p>
-        <p style="margin-top: 1rem;">
-          Favorite colors: <strong>sunset orange</strong>, cream, and deep forest green.  
-          Favorite season: autumn (obviously 🍂).
-        </p>
+      <div class="card">
+        <div class="card-icon">🦊</div>
+        <h3>I love Averi</h3>
+        <p>FiddleaFox’s fox is peak character design. green eyes + chicken obsession = perfect.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🥪</div>
+        <h3>Chicken supremacy</h3>
+        <p>Popeyes? Chick-fil-A? Doesn’t matter. Averi would approve.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💚</div>
+        <h3>Green is life</h3>
+        <p>(Fiddle likes green… so now I also like green. peer pressure works.)</p>
       </div>
     </div>
   </section>
 
-  <section id="interests">
-    <h2 class="section-title">Things I Love</h2>
-    <p class="section-sub">What keeps this fox’s tail wagging</p>
+  <section id="averi">
+    <h2 class="section-title">Averi appreciation zone</h2>
+    <p class="section-sub">the best fox to ever fox</p>
 
-    <div class="cards">
-      <div class="card">
-        <div class="card-icon">🌲</div>
-        <h3>Forest Walks</h3>
-        <p>There’s nothing better than the smell of pine and the crunch of leaves underpaw.</p>
+    <div class="silly-list">
+      <div class="silly-item">
+        <span>🦊</span>
+        <div>
+          <strong>Averi</strong> is FiddleaFox’s fursona — a fluffy red fox with big green eyes and an undying love for chicken sandwiches. absolute icon.
+        </div>
       </div>
-      <div class="card">
-        <div class="card-icon">🎨</div>
-        <h3>Art & Drawing</h3>
-        <p>I love sketching characters, landscapes, and of course… more foxes.</p>
+      <div class="silly-item">
+        <span>🍗</span>
+        <div>
+          if Averi and I ever met in a parallel universe I would buy her every chicken sandwich in a 50 mile radius. no regrets.
+        </div>
       </div>
-      <div class="card">
-        <div class="card-icon">🎵</div>
-        <h3>Music</h3>
-        <p>Chill lo-fi, acoustic, and anything with a warm, cozy feel.</p>
+      <div class="silly-item">
+        <span>💚</span>
+        <div>
+          green eyes + orange fur + that little smile = brain go brrr every single time.
+        </div>
       </div>
-      <div class="card">
-        <div class="card-icon">☕</div>
-        <h3>Cozy Moments</h3>
-        <p>Hot cocoa, soft blankets, rainy days, and good company.</p>
+      <div class="silly-item">
+        <span>✨</span>
+        <div>
+          this website exists purely because someone (me) has too much free time and too much Averi brainrot. you’re welcome.
+        </div>
       </div>
-      <div class="card">
-        <div class="card-icon">🎮</div>
-        <h3>Games</h3>
-        <p>Adventure games, cozy sims, and anything with exploration.</p>
+    </div>
+
+    <div class="gif-row" style="margin-top: 2.5rem;">
+      <div class="gif-box">
+        <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:#fff3e0;border-radius:10px;">🦊</div>
+        <div class="gif-label">Averi (imagine the GIF)</div>
       </div>
-      <div class="card">
-        <div class="card-icon">🌙</div>
-        <h3>Stargazing</h3>
-        <p>Looking up at the night sky always fills me with wonder.</p>
+      <div class="gif-box">
+        <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:#e8f5e9;border-radius:10px;">💚</div>
+        <div class="gif-label">green eyes supremacy</div>
+      </div>
+      <div class="gif-box">
+        <div style="height:160px;display:flex;align-items:center;justify-content:center;font-size:5rem;background:#fff8e1;border-radius:10px;">🥪</div>
+        <div class="gif-label">the sacred sandwich</div>
       </div>
     </div>
   </section>
 
-  <section id="facts">
-    <h2 class="section-title">Fun Fox Facts</h2>
-    <p class="section-sub">A few things you might not know</p>
+  <section id="code">
+    <h2 class="section-title">code that has fox energy</h2>
+    <p class="section-sub">because every good program needs a little Averi</p>
 
-    <div class="facts">
-      <div class="fact-list">
-        <div class="fact">
-          <span class="fact-emoji">🦊</span>
-          <div>
-            <strong>Species:</strong> Red fox (with a fluffy anthro twist).  
-            My fur is a warm orange-red with a cream belly and black-tipped ears.
-          </div>
-        </div>
-        <div class="fact">
-          <span class="fact-emoji">🍬</span>
-          <div>
-            <strong>Favorite snack:</strong> Berries, honey treats, and the occasional  
-            marshmallow roasted over a campfire.
-          </div>
-        </div>
-        <div class="fact">
-          <span class="fact-emoji">🗣️</span>
-          <div>
-            <strong>Pronouns:</strong> He/him (but I’m happy with whatever feels right  
-            when we’re just hanging out).
-          </div>
-        </div>
-        <div class="fact">
-          <span class="fact-emoji">✨</span>
-          <div>
-            <strong>Special talent:</strong> Perfecting the art of the dramatic tail flick  
-            and giving the best fluffy hugs.
-          </div>
-        </div>
-        <div class="fact">
-          <span class="fact-emoji">🏡</span>
-          <div>
-            <strong>Home:</strong> A cozy den tucked among autumn trees,  
-            filled with soft cushions, art supplies, and fairy lights.
-          </div>
-        </div>
-      </div>
+    <div class="code-block">
+      <span class="comment">// the most important constant in existence</span><br>
+      <span class="kw">const</span> AVERI_CUTENESS = <span class="str">Infinity</span>;<br><br>
+      <span class="comment">// daily priorities</span><br>
+      <span class="kw">function</span> dailyRoutine() {<br>
+      &nbsp;&nbsp;writeCode();<br>
+      &nbsp;&nbsp;thinkAboutAveri();<br>
+      &nbsp;&nbsp;maybeEatChickenSandwich(); <span class="comment">// important</span><br>
+      &nbsp;&nbsp;<span class="kw">return</span> <span class="str">"good day"</span>;<br>
+      }
+    </div>
+
+    <div class="code-block">
+      <span class="comment">// bug report from the fox department</span><br>
+      <span class="kw">if</span> (code.works === <span class="kw">false</span>) {<br>
+      &nbsp;&nbsp;console.log(<span class="str">"🦊 Averi is disappointed in you"</span>);<br>
+      &nbsp;&nbsp;fixItImmediately();<br>
+      }
     </div>
   </section>
 
   <section id="den">
-    <h2 class="section-title">Come Visit the Den</h2>
-    <p class="section-sub">Let’s be friends!</p>
+    <h2 class="section-title">come say hi!!</h2>
+    <p class="section-sub">the official social link (there is only one)</p>
 
-    <div style="text-align: center; max-width: 520px; margin: 0 auto;">
-      <p style="margin-bottom: 1.5rem;">
-        Whether you want to chat about art, share forest stories,  
-        or just say hi — my den is always open.  
-        Feel free to reach out!
+    <div class="social-box">
+      <p style="font-size:1.2rem; margin-bottom:0.5rem;">
+        find me on X / Twitter
       </p>
-
-      <div class="socials">
-        <a href="#" class="social" title="Twitter / X" aria-label="X">𝕏</a>
-        <a href="#" class="social" title="Discord" aria-label="Discord">💬</a>
-        <a href="#" class="social" title="Telegram" aria-label="Telegram">✈️</a>
-        <a href="#" class="social" title="Email" aria-label="Email">✉️</a>
-      </div>
-
-      <p style="margin-top: 2rem; font-size: 0.95rem; opacity: 0.8;">
-        (Replace the links above with your real socials!)
+      <p style="opacity:0.85; margin-bottom:0.5rem;">
+        where I occasionally post code things and definitely more Averi appreciation
+      </p>
+      <a href="https://x.com/fiddlecoding" target="_blank" rel="noopener" class="big-x">
+        𝕏  @fiddlecoding
+      </a>
+      <p style="margin-top:1.5rem; font-size:0.95rem;">
+        (that’s the only link. no pressure. but also please go look at cute foxes.)
       </p>
     </div>
   </section>
 
   <footer>
-    <p>Made with <span class="heart">♥</span> and lots of fox energy</p>
-    <p style="margin-top: 0.4rem; opacity: 0.7;">© 2026 Blaze the Fox · Stay fluffy</p>
+    <p>made with 💚 + too much chicken sandwich energy</p>
+    <p style="margin-top:0.4rem; opacity:0.8;">
+      FiddleCoding loves FiddleaFox’s Averi · 
+      <a href="https://x.com/fiddlecoding" target="_blank" rel="noopener">@fiddlecoding</a>
+    </p>
+    <p style="margin-top:0.6rem; font-size:0.85rem; opacity:0.6;">
+      this site is extremely silly on purpose. no serious business allowed.
+    </p>
   </footer>
 
   <script>
-    // Subtle paw prints that appear on click
+    const emojis = ['🐾', '🦊', '🍗', '🥪', '💚', '✨', '💻'];
     document.addEventListener('click', (e) => {
-      const paw = document.createElement('div');
-      paw.className = 'paw';
-      paw.textContent = '🐾';
-      paw.style.left = (e.clientX - 10) + 'px';
-      paw.style.top = (e.clientY - 10) + 'px';
-      paw.style.opacity = '0.7';
-      document.body.appendChild(paw);
-
-      setTimeout(() => {
-        paw.style.opacity = '0';
-        setTimeout(() => paw.remove(), 300);
-      }, 600);
+      const el = document.createElement('div');
+      el.className = 'particle';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = (e.clientX - 12) + 'px';
+      el.style.top = (e.clientY - 12) + 'px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 800);
     });
+
+    console.log('%c🦊 FiddleCoding was here', 'font-size:20px; color:#7cfc00; background:#1a1a2e; padding:8px;');
+    console.log('%cAveri would be proud (probably)', 'font-size:14px; color:#ff6b35;');
   </script>
 </body>
 </html>
